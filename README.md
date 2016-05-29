@@ -20,3 +20,13 @@ https://github.com/satyan/sugar
 http://blog.csdn.net/guolin_blog/article/details/17482095
 
 http://blog.csdn.net/guolin_blog/article/details/17482165
+
+缓存：http://www.mamicode.com/info-detail-503011.html
+
+ （3）FastJson:
+ 
+ github:https://github.com/Alibaba/fastjson/wiki/%E9%A6%96%E9%A1%B5
+ 
+ 解析示例：http://blog.sina.com.cn/s/blog_7ffb8dd501013qas.html
+ 
+ FastJson与Volley结合使用:http://blog.sina.com.cn/s/blog_7ffb8dd501013qas.html
