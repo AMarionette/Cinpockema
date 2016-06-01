@@ -8,11 +8,14 @@ import java.util.List;
  */
 public class Movie {
     private int id;
-    private String name;
-    private Date releaseDate;
-    private double rating;
+    private String title;
+    private String originalTitle;
+    private String imageUrl;//电影海报
+    private double rating;//评分
     private int duration;//时长，单位min
-    private String type;//类型：如动作、爱情
+    private String genres;//类型：如动作、爱情
+    private boolean onShow;//是否上映
+    //以下变量未完成
     private String director;//演员
     private String leadingRole;//主演
     private String area;
@@ -27,20 +30,28 @@ public class Movie {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getTitle() {
+        return title;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public Date getReleaseDate() {
-        return releaseDate;
+    public String getOriginalTitle() {
+        return originalTitle;
     }
 
-    public void setReleaseDate(Date releaseDate) {
-        this.releaseDate = releaseDate;
+    public void setOriginalTitle(String originalTitle) {
+        this.originalTitle = originalTitle;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public double getRating() {
@@ -59,12 +70,20 @@ public class Movie {
         this.duration = duration;
     }
 
-    public String getType() {
-        return type;
+    public String getGenres() {
+        return genres;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setGenres(String genres) {
+        this.genres = genres;
+    }
+
+    public boolean isOnShow() {
+        return onShow;
+    }
+
+    public void setOnShow(boolean onShow) {
+        this.onShow = onShow;
     }
 
     public String getDirector() {

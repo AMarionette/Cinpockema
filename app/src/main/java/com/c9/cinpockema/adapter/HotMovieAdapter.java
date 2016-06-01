@@ -5,6 +5,7 @@ package com.c9.cinpockema.adapter;
  */
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,13 +59,14 @@ public class HotMovieAdapter extends BaseAdapter {
             movieViewHolder = (ViewHolder)convertView.getTag();
         }
 
-        movieViewHolder.movieName.setText(movieList.get(position).getName());
+        movieViewHolder.movieName.setText(movieList.get(position).getTitle());
         movieViewHolder.movieInfo.setText(movieList.get(position).getDescription());
         movieViewHolder.movieScore.setText(Double.toString(movieList.get(position).getRating()));
         movieViewHolder.buyTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //点击购票
+                Log.v("tag","focus buy ticket");
             }
         });
 

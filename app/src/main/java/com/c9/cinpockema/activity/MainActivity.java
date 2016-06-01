@@ -1,6 +1,7 @@
 package com.c9.cinpockema.activity;
 
 import android.graphics.Color;
+import android.preference.PreferenceActivity;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTabHost;
 import android.os.Bundle;
@@ -13,16 +14,20 @@ import android.widget.TabHost;
 import android.widget.TabWidget;
 import android.widget.TextView;
 
+
+
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.c9.cinpockema.R;
 import com.c9.cinpockema.adapter.TabDb;
+import com.c9.cinpockema.model.ACache;
 import com.c9.cinpockema.model.LocationUtils;
 
 
 public class MainActivity extends FragmentActivity implements TabHost.OnTabChangeListener,View.OnClickListener {
-
 
     private FragmentTabHost tabHost;
 
@@ -31,16 +36,40 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
         super.onCreate(savedInstanceState);
         //初始化百度地图组件，每个activity使用前必须
         SDKInitializer.initialize(getApplicationContext());
+        //设置没有标题栏
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        //布局
         setContentView(R.layout.activity_main);
+
+
+        //test cache
+//        ACache aCache = ACache.get(getApplicationContext());
+//        String listStr = "[\n" +
+//                "  {\n" +
+//                "    \"id\": 21441132,\n" +
+//                "    \"title\": \"爱丽丝梦游仙境2：镜中奇遇记\",\n" +
+//                "    \"originalTitle\": \"Alice Through the Looking Glass\",\n" +
+//                "    \"rating\": 6.9,\n" +
+//                "    \"genres\": \"奇幻,冒险\",\n" +
+//                "    \"imageUrl\": \"http://img3.douban.com/view/movie_poster_cover/spst/public/p2349374680.jpg\",\n" +
+//                "    \"onShow\": true\n" +
+//                "  },\n" +
+//                "  {\n" +
+//                "    \"id\": 6873736,\n" +
+//                "    \"title\": \"愤怒的小鸟\",\n" +
+//                "    \"originalTitle\": \"The Angry Birds Movie\",\n" +
+//                "    \"rating\": 7.2,\n" +
+//                "    \"genres\": \"喜剧,动作,动画\",\n" +
+//                "    \"imageUrl\": \"http://img3.douban.com/view/movie_poster_cover/spst/public/p2352310242.jpg\",\n" +
+//                "    \"onShow\": true\n" +
+//                "  }]";
+//        aCache.put("movieList", listStr);
 
         tabHost = (FragmentTabHost) findViewById(R.id.tabHost);
         tabHost.setup(this, this.getSupportFragmentManager(), R.id.contentLayout);
         tabHost.getTabWidget().setDividerDrawable(null);
         tabHost.setOnTabChangedListener(this);
         initTab();
-
-
 
     }
 
