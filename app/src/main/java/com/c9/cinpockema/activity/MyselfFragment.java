@@ -17,7 +17,7 @@ import com.c9.cinpockema.R;
 /**
  * Created by a694393453 on 2016/4/10.
  */
-public class MyselfFragment extends Fragment implements View.OnClickListener {
+public class MyselfFragment extends Fragment  {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -26,12 +26,20 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.my_info,null);
+        View view = inflater.inflate(R.layout.activity_myself,null);
+        View signin = view.findViewById(R.id.imageButton);
+        signin.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
+            }
+        });
 //        View headLayout = view.findViewById(R.id.layout_top);
 //        headLayout.setOnClickListener(this);
-//        return view;
+        return view;
 
-        return super.onCreateView(inflater,container,savedInstanceState);
+ //       return super.onCreateView(inflater,container,savedInstanceState);
     }
 
     @Override
@@ -39,16 +47,15 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         super.setArguments(args);
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
+   // @Override
+//    public void onClick(View v) {
+//        switch (v.getId()) {
+////
+//            case R.id.imageButton:
 //
-//            case R.id.layout_top:
-//                Intent intent = new Intent(getActivity(),LoginActivity.class);
-//                startActivity(intent);
 //                break;
-            default:
-                break;
-        }
-    }
+//            default:
+//                break;
+//        }
+//    }
 }

@@ -20,7 +20,7 @@
 
     <color name="White">#FAFAFA</color>
     <color name="Gray">#AAAAAA</color>
-    <color name="DarkRed">#ffc90000</color>
+    <color name="DarkRed">#c90000</color>
     <color name="Red">#ffe81903</color>
     <color name="Black">#ff080100</color>
     <color name="Orange">#fff2a60e</color>
