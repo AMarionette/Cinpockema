@@ -10,7 +10,8 @@ public class User {
     private String userName;
     private String password;
     private String nickName;//昵称
-    private String avatarUrl;
+    private String avatarUrl;//头像Url
+    private String signature;//签名
     private List<Order> orderList;
     private List<MovieComment> movieComments;
     private List<Movie> collections;
@@ -57,6 +58,14 @@ public class User {
 
     public List<Order> getOrderList() {
         return orderList;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 
     public void setOrderList(List<Order> orderList) {

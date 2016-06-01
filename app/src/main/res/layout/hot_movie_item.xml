@@ -39,6 +39,7 @@
     <Button
         android:id="@+id/buy_ticket"
         android:text="购票"
+        android:focusable="false"
         android:textColor="@color/Red"
         android:background="@android:color/transparent"
         android:layout_alignParentRight="true"

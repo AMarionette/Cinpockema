@@ -6,12 +6,13 @@ import java.util.Date;
  * Created by marionette on 2016/5/24.
  */
 public class MovieComment {
-    private int id;
-    private int userId;
-    private int movieId;
-    private double rating;
-    private String content;
-    private Date publishTime;
+    private int id;//评论id，唯一
+    private User user;
+    private int movieId;//所评论的电影
+    private double score;//评分
+    private String content;//内容
+    private Date createTime;//评论时间
+
 
     public int getId() {
         return id;
@@ -29,20 +30,20 @@ public class MovieComment {
         this.content = content;
     }
 
-    public Date getPublishTime() {
-        return publishTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setPublishTime(Date publishTime) {
-        this.publishTime = publishTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
-    public double getRating() {
-        return rating;
+    public double getScore() {
+        return score;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setScore(double score) {
+        this.score = score;
     }
 
     public int getMovieId() {
@@ -53,11 +54,11 @@ public class MovieComment {
         this.movieId = movieId;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 }

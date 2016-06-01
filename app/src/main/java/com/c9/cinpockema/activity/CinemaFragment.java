@@ -1,12 +1,14 @@
 package com.c9.cinpockema.activity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.c9.cinpockema.R;
@@ -34,7 +36,15 @@ public class CinemaFragment extends Fragment {
 
         CinemaAdapter cinemaAdapter = new CinemaAdapter(getActivity(), getCinemaList());
         cinemaListView.setAdapter(cinemaAdapter);
+        //跳转到影院详情页面
+        cinemaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                Intent intent = new Intent(getActivity().getApplicationContext(), CinemaInfo.class);
+                startActivity(intent);
+            }
+        });
         //更新
         cinemaAdapter.notifyDataSetChanged();
         return view;
