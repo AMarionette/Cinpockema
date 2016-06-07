@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.TabHost;
 import android.widget.TabWidget;
@@ -23,7 +24,6 @@ import com.baidu.mapapi.model.LatLng;
 import com.baidu.mapapi.utils.DistanceUtil;
 import com.c9.cinpockema.R;
 import com.c9.cinpockema.adapter.TabDb;
-import com.c9.cinpockema.model.ACache;
 import com.c9.cinpockema.model.LocationUtils;
 
 
@@ -87,18 +87,17 @@ public class MainActivity extends FragmentActivity implements TabHost.OnTabChang
     //tab切换
     @Override
     public void onTabChanged(String tabId) {
-
-        //test
-        // 天安门坐标
-        double mLat1 = 39.915291;
-        double mLon1 = 116.403857;
-        // 百度大厦坐标
-        double mLat2 = 40.056858;
-        double mLon2 = 200.308194;
-        LatLng pt1 = new LatLng(mLat1, mLon1);
-        LatLng pt2 = new LatLng(mLat2, mLon2);
-        int dis = LocationUtils.getDistance(pt1, pt2);
-        Log.v("distance:",Integer.toString(dis));
+//        //test
+//        // 天安门坐标
+//        double mLat1 = 39.915291;
+//        double mLon1 = 116.403857;
+//        // 百度大厦坐标
+//        double mLat2 = 40.056858;
+//        double mLon2 = 200.308194;
+//        LatLng pt1 = new LatLng(mLat1, mLon1);
+//        LatLng pt2 = new LatLng(mLat2, mLon2);
+//        int dis = LocationUtils.getDistance(pt1, pt2);
+//        Log.v("distance:",Integer.toString(dis));
         Log.v("tag id is:", tabId);
         updateTab();
     }

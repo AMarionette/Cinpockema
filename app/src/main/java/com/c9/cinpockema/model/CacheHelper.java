@@ -3,6 +3,9 @@ package com.c9.cinpockema.model;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.c9.cinpockema.activity.MyApplication;
 
 import java.util.ArrayList;
@@ -13,20 +16,15 @@ import java.util.List;
  */
 public class CacheHelper {
 
-    //将数据缓存
-    public static void cacheMovieList(String str) {
-        ACache cache = ACache.get(MyApplication.getContext());
-        cache.put(Constant.MOVIELISTKEY, str);
-    }
-
-    //获取缓存中的movie数据
-    public static List<Movie> getMovieListFromCache() {
-        List<Movie> movieList = new ArrayList<Movie>();
-        ACache cache = ACache.get(MyApplication.getContext());
-        String jsonStr = cache.getAsString(Constant.MOVIELISTKEY);
-        //解析
-        movieList = FastJsonParser.listParse(jsonStr, Movie.class);
-        return movieList;
-    }
+//    //获取缓存中的movie list数据
+//    public static List<Movie> getMovieListFromCache() {
+//        List<Movie> movieList = new ArrayList<Movie>();
+//        if(MyApplication.getRequestQueue().getCache().get(Constant.MOVIELISTURL) != null) {
+//            String jsonStr = MyApplication.getRequestQueue().getCache().get(Constant.MOVIELISTURL).data.toString();
+//            //解析
+//            movieList = FastJsonParser.listParse(jsonStr, Movie.class);
+//        }
+//        return movieList;
+//    }
 
 }
