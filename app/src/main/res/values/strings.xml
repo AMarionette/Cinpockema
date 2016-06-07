@@ -7,4 +7,5 @@
     <string name="hot_movie">热映</string>
     <string name="upcoming_movie">待映</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_cinema_list">CinemaListActivity</string>
 </resources>

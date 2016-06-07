@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +14,19 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.c9.cinpockema.R;
+import com.c9.cinpockema.model.FastJsonParser;
+import com.c9.cinpockema.model.JsonStringCallBack;
 import com.c9.cinpockema.model.Movie;
 
 import com.c9.cinpockema.adapter.HotMovieAdapter;
+import com.c9.cinpockema.model.NetworkHelper;
 
 import java.util.ArrayList;
 
 /**
  * Created by a694393453 on 2016/4/10.
  */
-public class MovieFragment extends Fragment {
+public class MovieFragment extends Fragment implements JsonStringCallBack {
     private ListView movieListView;
     private ArrayList<Movie> movieList;
 
@@ -37,11 +41,8 @@ public class MovieFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        //test
-//        if (!NetworkHelper.isNetworkConnected(getContext())) {
-//            movieList = (ArrayList<Movie>) CacheHelper.getMovieListFromCache(getContext());
-//            Log.v("test:", String.valueOf(movieList.size()));
-//        }
+        Log.v("attach:","Movie Fragment");
+        NetworkHelper.sendMovieListRequest(this);
     }
 
     @Nullable
@@ -55,6 +56,9 @@ public class MovieFragment extends Fragment {
         //电影列表控件实例化
        movieListView = (ListView) view.findViewById(R.id.movie_list);
         //设置适配器
+        //暂未实现
+        //HotMovieAdapter hotMovieAdapter = new HotMovieAdapter(getActivity(), movieList);
+        //测试
         HotMovieAdapter hotMovieAdapter = new HotMovieAdapter(getActivity(), getHotMovieList());
         movieListView.setAdapter(hotMovieAdapter);
         //listviewitem点击事件
@@ -135,6 +139,12 @@ public class MovieFragment extends Fragment {
     @Override
     public void setArguments(Bundle args) {
         super.setArguments(args);
+    }
+
+    //json string call back
+    @Override
+    public void onSuccess(String jsonStr) {
+        movieList = (ArrayList<Movie>) FastJsonParser.listParse(jsonStr, Movie.class);
     }
 }
 
