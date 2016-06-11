@@ -5,4 +5,5 @@
     <color name="colorAccent">#FF4081</color>
     <color name="foreground_dark">#bebebe</color>
     <color name="trans_black">#b5000000</color>
+    <color name="light_gray">#FFF0F0F0</color>
 </resources>

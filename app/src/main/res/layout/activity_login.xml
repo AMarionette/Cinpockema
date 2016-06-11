@@ -111,31 +111,36 @@
         android:text="第三方账户登录"
         android:id="@+id/other_way_to_login" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:orientation="horizontal"
-        android:layout_below="@+id/other_way_to_login">
+        android:layout_below="@+id/other_way_to_login"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp">
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/wechat_icon"
             android:src="@drawable/weixin"
-            android:layout_marginLeft="65dp" />
+            android:layout_alignParentTop="true" />
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/qq_icon"
             android:src="@drawable/qq"
-            android:layout_marginLeft="50dp"/>
+            android:layout_centerInParent="true"
+            android:layout_alignParentTop="true" />
         <ImageView
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:id="@+id/sina_icon"
             android:src="@drawable/weibo"
-            android:layout_marginLeft="50dp"/>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="false"
+            android:layout_alignParentEnd="true" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </RelativeLayout>
