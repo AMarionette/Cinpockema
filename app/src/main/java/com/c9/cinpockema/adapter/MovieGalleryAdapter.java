@@ -12,6 +12,7 @@ import android.widget.ListView;
 
 import com.c9.cinpockema.R;
 import com.c9.cinpockema.model.Movie;
+import com.c9.cinpockema.model.NetworkHelper;
 
 import java.util.ArrayList;
 
@@ -44,8 +45,7 @@ public class MovieGalleryAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView = new ImageView(context);
-//        imageView.setImageBitmap();
-        imageView.setImageResource(R.mipmap.ic_launcher);
+        NetworkHelper.sendImgRequest(imageView, movies.get(position).getImageUrl());
         imageView.setId(position);
         imageView.setLayoutParams(new Gallery.LayoutParams(240, 360));
         imageView.setScaleType(ImageView.ScaleType.FIT_XY);

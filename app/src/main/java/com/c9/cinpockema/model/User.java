@@ -7,11 +7,14 @@ import java.util.List;
  */
 public class User {
     private int id;
+    private String role;
     private String userName;
     private String password;
     private String nickName;//昵称
+    private String gender;
     private String avatarUrl;//头像Url
     private String signature;//签名
+
     private List<Order> orderList;
     private List<MovieComment> movieComments;
     private List<Movie> collections;
@@ -22,6 +25,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String getUserName() {
@@ -46,6 +57,14 @@ public class User {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getAvatarUrl() {

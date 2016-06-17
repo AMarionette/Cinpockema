@@ -7,11 +7,12 @@ import java.util.Date;
  */
 public class CinemaComment {
     private int id;
-    private int userId;
-    private int cinemaId;
-    private double rating;
+    private double score;
     private String content;
-    private Date publishTime;
+    private String createTime;
+    private User user;
+    private int cinemaId;
+
 
     public int getId() {
         return id;
@@ -21,12 +22,20 @@ public class CinemaComment {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public double getScore() {
+        return score;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public int getCinemaId() {
@@ -37,13 +46,6 @@ public class CinemaComment {
         this.cinemaId = cinemaId;
     }
 
-    public double getRating() {
-        return rating;
-    }
-
-    public void setRating(double rating) {
-        this.rating = rating;
-    }
 
     public String getContent() {
         return content;
@@ -53,11 +55,11 @@ public class CinemaComment {
         this.content = content;
     }
 
-    public Date getPublishTime() {
-        return publishTime;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setPublishTime(Date publishTime) {
-        this.publishTime = publishTime;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
     }
 }

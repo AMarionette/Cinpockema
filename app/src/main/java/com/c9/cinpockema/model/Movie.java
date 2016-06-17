@@ -1,5 +1,8 @@
 package com.c9.cinpockema.model;
 
+import android.graphics.Bitmap;
+
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,11 +18,13 @@ public class Movie {
     private int duration;//时长，单位min
     private String genres;//类型：如动作、爱情
     private boolean onShow;//是否上映
+    private Bitmap imageBitmap;
+    private int wishCount;
     //以下变量未完成
     private String director;//演员
     private String leadingRole;//主演
     private String area;
-    private String description;
+    private String summary;
     private List<MovieComment> comments;
 
     public int getId() {
@@ -86,6 +91,22 @@ public class Movie {
         this.onShow = onShow;
     }
 
+    public Bitmap getImageBitmap() {
+        return imageBitmap;
+    }
+
+    public void setImageBitmap(Bitmap imageBitmap) {
+        this.imageBitmap = imageBitmap;
+    }
+
+    public int getWishCount() {
+        return wishCount;
+    }
+
+    public void setWishCount(int wishCount) {
+        this.wishCount = wishCount;
+    }
+
     public String getDirector() {
         return director;
     }
@@ -110,12 +131,12 @@ public class Movie {
         this.area = area;
     }
 
-    public String getDescription() {
-        return description;
+    public String getSummary() {
+        return summary;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setSummary(String summary) {
+        this.summary = summary;
     }
 
     public List<MovieComment> getComments() {

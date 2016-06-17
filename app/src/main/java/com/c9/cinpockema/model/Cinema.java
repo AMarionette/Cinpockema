@@ -7,19 +7,22 @@ import java.util.List;
  */
 public class Cinema {
     private int id;
+    private int cityId;//所属城市ID
     private String name;//电影院名字
     private String introduction;//影院介绍
-    private double rating;//评分，暂时忽略
+    private String address;//地址
+    private String phone;//影院电话
+    private double score;//评分
+    //影院位置信息
+    private double latitude;//纬度
+    private double longitude;//经度
+    //以下未定
     private List<CinemaComment> comments;//影院评论
-    private String phoneNumber;//影院电话
     private List<Hall> halls;//影厅
     private List<Movie> movies;//播放的电影列表
     private List<Screening> screenings;//场次
-    //影院位置信息
-    private String address;//地址
-    private int cityId;//所属城市ID
-    private double lat;//纬度
-    private double lng;//经度
+
+
 
 
     public String getAddress() {
@@ -38,20 +41,20 @@ public class Cinema {
         this.cityId = cityId;
     }
 
-    public double getLat() {
-        return lat;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setLat(double lat) {
-        this.lat = lat;
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
-    public double getLng() {
-        return lng;
+    public double getLongitude() {
+        return longitude;
     }
 
-    public void setLng(double lng) {
-        this.lng = lng;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     public int getId() {
@@ -78,12 +81,12 @@ public class Cinema {
         this.introduction = introduction;
     }
 
-    public double getRating() {
-        return rating;
+    public double getScore() {
+        return score;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public void setScore(double score) {
+        this.score = score;
     }
 
     public List<CinemaComment> getComments() {
@@ -94,12 +97,12 @@ public class Cinema {
         this.comments = comments;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public List<Hall> getHalls() {

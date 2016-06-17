@@ -8,14 +8,13 @@ import java.util.List;
  */
 public class Screening {
     private int id;
-    private Date date;
-    private Date startTime;
-    private Date endTime;
+    private Long startTime;
+    private int runningTime;
     private List<Seat> seats;
 
-    private int movieId;
+    private Movie movie;
     private int cinemaId;
-    private int hallId;
+    private Hall hall;
     //???需要电影票id吗
     private int ticketId;
 
@@ -27,28 +26,36 @@ public class Screening {
         this.id = id;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Date getStartTime() {
+    public Long getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Long startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
-        return endTime;
+    public int getRunningTime() {
+        return runningTime;
     }
 
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
+    public void setRunningTime(int runningTime) {
+        this.runningTime = runningTime;
+    }
+
+    public Movie getMovie() {
+        return movie;
+    }
+
+    public void setMovie(Movie movie) {
+        this.movie = movie;
+    }
+
+    public Hall getHall() {
+        return hall;
+    }
+
+    public void setHall(Hall hall) {
+        this.hall = hall;
     }
 
     public List<Seat> getSeats() {
@@ -59,13 +66,7 @@ public class Screening {
         this.seats = seats;
     }
 
-    public int getMovieId() {
-        return movieId;
-    }
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
-    }
 
     public int getCinemaId() {
         return cinemaId;
@@ -75,13 +76,6 @@ public class Screening {
         this.cinemaId = cinemaId;
     }
 
-    public int getHallId() {
-        return hallId;
-    }
-
-    public void setHallId(int hallId) {
-        this.hallId = hallId;
-    }
 
     public int getTicketId() {
         return ticketId;

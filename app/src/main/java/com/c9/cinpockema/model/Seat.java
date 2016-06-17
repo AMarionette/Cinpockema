@@ -4,6 +4,7 @@ package com.c9.cinpockema.model;
  * Created by marionette on 2016/5/24.
  */
 public class Seat {
+    private int id;
 
     private int hallId;//影厅id
     private int coordinateX;//座位坐标x
@@ -15,6 +16,14 @@ public class Seat {
     private String name;//座位名字：第x排第y座
 
     private int status;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public int getHallId() {
         return hallId;
