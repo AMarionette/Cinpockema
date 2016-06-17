@@ -2,6 +2,7 @@ package com.c9.cinpockema.activity;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -28,6 +29,10 @@ import android.widget.Toast;
 import com.almeros.android.multitouch.MoveGestureDetector;
 import com.c9.cinpockema.R;
 import com.c9.cinpockema.adapter.SeatTableView;
+import com.c9.cinpockema.model.Constant;
+import com.c9.cinpockema.model.FastJsonParser;
+import com.c9.cinpockema.model.JsonStringCallBack;
+import com.c9.cinpockema.model.NetworkHelper;
 import com.c9.cinpockema.model.Seat;
 
 
@@ -54,8 +59,8 @@ public class SelectSeatActivity extends AppCompatActivity implements OnTouchList
     SeatTableView seatTableView;
     LinearLayout rowView;
     private Seat[][] seatTable;
-
-    public List<Seat> selectedSeats;
+    private ArrayList<Seat> seats;//影厅所有座位
+    private List<Seat> selectedSeats;//选中的座位
 
     private int screenWidth;
     private int minLeft;
@@ -65,6 +70,17 @@ public class SelectSeatActivity extends AppCompatActivity implements OnTouchList
 
     private LinearLayout showSeatLayout;//显示已选座位
 
+    //call back
+    private JsonStringCallBack seatsRequestCallBack = new JsonStringCallBack() {
+        @Override
+        public void onSuccess(String jsonStr) {
+            seats = (ArrayList<Seat>) FastJsonParser.listParse(jsonStr, Seat.class);
+            //根据seats初始化座位列表
+            initSeatTable();
+            //根据seatTable初始化座位列表试图
+            initSeatTableView();
+        }
+    };
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,11 +88,16 @@ public class SelectSeatActivity extends AppCompatActivity implements OnTouchList
         Resources resources = getResources();
         screenWidth = resources.getDisplayMetrics().widthPixels;
         defWidth = resources.getDimensionPixelSize(R.dimen.padding_40dp);
+        //获取传递过来的数据
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        int cinemaId = bundle.getInt(Constant.CINEMAID);
+        int hallId = bundle.getInt(Constant.HALLID);
+        //初始化页面控件
+        initScreen();
 
-
-        initScreen();//初始化页面控件
-        initSeatTable();
-        initActionBar();//初始化actionbar
+        //初始化actionbar
+        initActionBar();
         selectedSeats = new ArrayList<Seat>();
         seatTableView = (SeatTableView) findViewById(R.id.seatviewcont);
         seatTableView.setMinimumHeight(screenWidth/2 );
@@ -86,7 +107,27 @@ public class SelectSeatActivity extends AppCompatActivity implements OnTouchList
         alpha.setDuration(0); // Make animation instant
         alpha.setFillAfter(true); // Tell it to persist after the animation ends
 
+        onChanged();
+        // Setup Gesture Detectors
+        mScaleDetector = new ScaleGestureDetector(this, new ScaleListener());
+        mMoveDetector = new MoveGestureDetector(this, new MoveListener());
 
+        //send seats request
+        NetworkHelper.sendStrRequest(seatsRequestCallBack, Constant.getSeatsUrl(cinemaId,hallId));
+    }
+
+//    //初始化seatTable
+//    private void initSeatTable(){
+//        seatTable = new Seat[maxRow][maxColumn];
+//        for (int i = 0; i < seats.size(); i++) {
+//            int coordinateX = seats.get(i).getCoordinateX();
+//            int coordinateY = seats.get(i).getCoordinateY();
+//            seatTable[coordinateX][coordinateY] = seats.get(i);
+//        }
+//    }
+
+    //初始化座位视图：根据传入的seatList进行初始化
+    private void initSeatTableView() {
         //居中线的画笔
         Paint paint = new Paint();
         paint.setAntiAlias(true);
@@ -95,18 +136,12 @@ public class SelectSeatActivity extends AppCompatActivity implements OnTouchList
         paint.setStyle(Paint.Style.STROKE);
         paint.setStrokeJoin(Paint.Join.ROUND);
 
-
         seatTableView.setSeatTable(seatTable);
         seatTableView.setRowSize(maxRow);
         seatTableView.setColumnSize(maxColumn);
         seatTableView.setOnTouchListener(this);
         seatTableView.setLinePaint(paint);
         seatTableView.setDefWidth(defWidth);
-        onChanged();
-
-        // Setup Gesture Detectors
-        mScaleDetector = new ScaleGestureDetector(this, new ScaleListener());
-        mMoveDetector = new MoveGestureDetector(this, new MoveListener());
     }
 
 
@@ -152,17 +187,29 @@ public class SelectSeatActivity extends AppCompatActivity implements OnTouchList
                 int j = newClick[1];
                 if (!eatClick && i != -1 && j != -1 && i == oldClick[0] && j == oldClick[1] ) {
                     if (seatTable[i][j].getStatus() == 1) {
-                        seatTable[i][j].setStatus(2);
-                        selectedSeats.add(seatTable[i][j]);
-                        Toast.makeText(this,seatTable[i][j].getName(), Toast.LENGTH_SHORT ).show();
-                        //添加一个显示已选座位的Button
-                        Button button = new Button(SelectSeatActivity.this);
-                        button.setText(seatTable[i][j].getName());
-                        showSeatLayout.addView(button);
-
-
+                        //如果座位超过4，则不能再选
+                        if (selectedSeats.size() > 4) {
+                            Toast.makeText(SelectSeatActivity.this, Constant.SEATOVERMAX, Toast.LENGTH_SHORT).show();
+                        } else {
+                            seatTable[i][j].setStatus(1);
+                            selectedSeats.add(seatTable[i][j]);
+                            Toast.makeText(this, seatTable[i][j].getName(), Toast.LENGTH_SHORT).show();
+                            //添加一个显示已选座位的Button
+                            Button button = new Button(SelectSeatActivity.this);
+                            button.setText(seatTable[i][j].getName());
+                            showSeatLayout.addView(button);
+                        }
                     } else {
                         seatTable[i][j].setStatus(1);
+                        //index，标记当前点击座位在座位列表的位置，用于移除该button
+                        int index = 0;
+                        for (int pos = 0; pos < selectedSeats.size();pos++) {
+                            if (selectedSeats.get(pos) == seatTable[i][j]) {
+                                index = pos;
+                            }
+                        }
+                        showSeatLayout.removeViewAt(index);
+
                         selectedSeats.remove(seatTable[i][j]);
                     }
                 }
@@ -270,16 +317,15 @@ public class SelectSeatActivity extends AppCompatActivity implements OnTouchList
                 seat.setRow(i + 1);
                 seat.setCol(j + 1);
                 seat.setName((i + 1) + " Row" + (j + 1) + " Seat");
-                seat.setStatus(randInt(-2, 1));
+                seat.setStatus(1);
                 seatTable[i][j] = seat.getStatus() == -2 ? null : seat;
             }
         }
     }
-    //测试用，正式删除
-    public  int randInt(int min, int max) {
-        Random rand = new Random();
-        return rand.nextInt((max - min) + 1) + min;
-    }
+
+
+
+
 
     int[] noSeat = {-1, -1};
     //click position(x, y)

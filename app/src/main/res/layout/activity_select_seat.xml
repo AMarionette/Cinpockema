@@ -15,6 +15,7 @@
         android:paddingLeft="5dp"/>
 
     <TextView
+        android:id="@+id/start_time"
         android:text="2016年5月12日 6:30"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -14,15 +14,19 @@ import com.c9.cinpockema.R;
 import com.c9.cinpockema.adapter.CinemaAdapter;
 import com.c9.cinpockema.model.Cinema;
 import com.c9.cinpockema.model.Constant;
+import com.c9.cinpockema.model.FastJsonParser;
+import com.c9.cinpockema.model.JsonStringCallBack;
 import com.c9.cinpockema.model.Movie;
+import com.c9.cinpockema.model.NetworkHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CinemaListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class CinemaListActivity extends AppCompatActivity implements AdapterView.OnItemClickListener, JsonStringCallBack {
 
     private ArrayList<Cinema> cinemaList;//电影对应的影院列表
     private String movieName = "MovieName";//电影名
+    private int movieId;//movie id
     private Bundle bundle;//由MovieInfo传递过来的bundle
     private ListView cinemaListView;//
 
@@ -34,9 +38,11 @@ public class CinemaListActivity extends AppCompatActivity implements AdapterView
     }
     //初始化
     private void init() {
-        //获取电影名
+        //获取电影名,电影id
         bundle = getIntent().getExtras();
         movieName = bundle.getString(Constant.MOVIENAME);
+        movieId = bundle.getInt(Constant.MOVIEID);
+        NetworkHelper.sendStrRequest(this, Constant.getCinemaListUrl(movieId));
         //actionbar设置
         ActionBar actionBar = getSupportActionBar();
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.drawable.ActionBar));
@@ -44,15 +50,9 @@ public class CinemaListActivity extends AppCompatActivity implements AdapterView
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.show();
         //listview的初始化
-        cinemaList = getCinemaList();//test,待删除
         cinemaListView = (ListView)CinemaListActivity.this.findViewById(R.id.cinema_listView);
-        CinemaAdapter adapter = new CinemaAdapter(CinemaListActivity.this, cinemaList);
-        cinemaListView.setAdapter(adapter);//添加适配器
-        cinemaListView.setOnItemClickListener(this);
-        adapter.notifyDataSetChanged();
 
     }
-
 
 
 
@@ -67,32 +67,27 @@ public class CinemaListActivity extends AppCompatActivity implements AdapterView
     }
 
 
-    //test
-    public ArrayList<Cinema> getCinemaList() {
-        ArrayList<Cinema> cinemas = new ArrayList<Cinema>();
-
-        Cinema cinema0 = new Cinema();
-        cinema0.setName("金逸珠江国际影城（大学城店）");
-        cinema0.setAddress("番禺区小谷围街北岗村中二横路新天地");
-        cinemas.add(cinema0);
-
-        Cinema cinema1 = new Cinema();
-        cinema1.setName("广东科学中心IMAX巨幕影院");
-        cinema1.setAddress("番禺区大学城科普路168号");
-        cinemas.add(cinema1);
-
-        Cinema cinema2 = new Cinema();
-        cinema2.setName("映联万和影城");
-        cinema2.setAddress("海珠区新港东路618号南丰汇广场3楼");
-        cinemas.add(cinema2);
-
-        return cinemas;
-    }
-
+    //cinemlistview 的 item 点击事件
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         //跳转到影院详情页面，携带信息：电影，影院
         Intent intent = new Intent(CinemaListActivity.this, CinemaInfo.class);
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constant.MOVIEID, movieId);
+        bundle.putInt(Constant.CINEMAID, cinemaList.get(position).getId());
+        intent.putExtras(bundle);
         startActivity(intent);
     }
+
+    @Override
+    public void onSuccess(String jsonStr) {
+        cinemaList = (ArrayList<Cinema>) FastJsonParser.listParse(jsonStr, Cinema.class);
+        CinemaAdapter adapter = new CinemaAdapter(CinemaListActivity.this, cinemaList);
+        cinemaListView.setAdapter(adapter);//添加适配器
+        cinemaListView.setOnItemClickListener(this);
+        adapter.notifyDataSetChanged();
+    }
+
+
+
 }

@@ -25,7 +25,7 @@ public class SeatTableView extends View {
     public Bitmap SeatSale, SeatSold, SeatSelected;
 
     private int seatWidth;// seat size : width == height
-    private int defWidth;// default value
+    private int defWidth = 10;// default value
 
 
 

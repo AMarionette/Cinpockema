@@ -11,7 +11,7 @@ public class MovieComment {
     private int movieId;//所评论的电影
     private double score;//评分
     private String content;//内容
-    private Date createTime;//评论时间
+    private Long createTime;//评论时间
 
 
     public int getId() {
@@ -30,11 +30,11 @@ public class MovieComment {
         this.content = content;
     }
 
-    public Date getCreateTime() {
+    public Long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Long createTime) {
         this.createTime = createTime;
     }
 
