@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:paddingTop="@dimen/padding_10dp"
+    android:paddingBottom="5dp"
+    android:paddingRight="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -18,14 +21,19 @@
         android:padding="10dp"/>
 
     <TextView
+        android:paddingTop="5dp"
         android:id="@+id/cinema_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/DarkGray"
+        android:textColor="#7c7a7a"
+        android:textSize="14sp"
         android:layout_alignParentBottom="true"
         android:padding="10dp"/>
 
     <TextView
+        android:drawableLeft="@drawable/distance_img"
+        android:text="500m"
+        android:gravity="center_vertical"
         android:id="@+id/cinema_distance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

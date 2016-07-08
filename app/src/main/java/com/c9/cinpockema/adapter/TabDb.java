@@ -14,11 +14,11 @@ public class TabDb {
         return tabsText;
     }
     public static int[] getTabsImgNormal() {
-        int[] imgId = {R.drawable.foot_news_normal,R.drawable.foot_fond_normal,R.drawable.foot_out_normal};
+        int[] imgId = {R.drawable.movie_normal,R.drawable.cinema_nomal,R.drawable.myself_normal};
         return imgId;
     }
     public static int[] getTabImgLight() {
-        int[] imgId = {R.drawable.foot_news_light, R.drawable.foot_found_light,R.drawable.foot_out_light};
+        int[] imgId = {R.drawable.movie_light, R.drawable.cinema_light,R.drawable.myself_light};
         return imgId;
     }
     public static Class[] getContentFragments() {

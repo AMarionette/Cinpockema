@@ -87,13 +87,13 @@
             android:stretchColumns="0,1">
             <TableRow>
                 <Button
-                    android:drawableLeft="@drawable/foot_news_light"
+                    android:drawableLeft="@drawable/collection_normal"
                     android:text="收藏"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                 </Button>
                 <Button
-                    android:drawableLeft="@drawable/foot_out_light"
+                    android:drawableLeft="@drawable/comment"
                     android:text="评论"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
