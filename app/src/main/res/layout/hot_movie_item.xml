@@ -4,22 +4,23 @@
     android:layout_height="100dp">
     <!--电影宣传图片-->
     <ImageView
-        android:id="@+id/movie_pic"
+        android:padding="7dp"
+        android:id="@+id/movie_img"
         android:src="@drawable/apple"
-        android:layout_width="100dp"
-        android:layout_height="100dp" />
+        android:layout_width="80dp"
+        android:layout_height="120dp" />
     <!--电影名-->
     <TextView
         android:id="@+id/movie_name"
-        android:layout_toRightOf="@+id/movie_pic"
-        android:paddingTop="10dp"
+        android:layout_toRightOf="@+id/movie_img"
+        android:paddingTop="20dp"
         android:textColor="@color/Black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
     <!--电影提示信息-->
     <TextView
         android:id="@+id/movie_info"
-        android:layout_toRightOf="@+id/movie_pic"
+        android:layout_toRightOf="@+id/movie_img"
         android:layout_alignParentBottom="true"
         android:paddingBottom="10dp"
         android:textColor="@color/DarkGray"

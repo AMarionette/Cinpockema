@@ -9,21 +9,32 @@
     </style>
 
     <drawable name="ActionBar">@color/Red</drawable>
-    <style name ="CustomWindowTitleBackground">
-        <item name ="android:background">#ffe81903</item>
+
+    <style name="CustomWindowTitleBackground">
+        <item name="android:background">#ffe81903</item>
     </style>
-    <style name="MovieFragmentTitle"  parent="android:Theme">
-        <item name ="android:windowTitleSize">45dp</item>
-        <item name ="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
+
+    <style name="MovieFragmentTitle" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="android:windowTitleSize">45dp</item>
+        <item name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
     </style>
 
 
-    <color name="White">#FAFAFA</color>
-    <color name="Gray">#AAAAAA</color>
-    <color name="DarkRed">#c90000</color>
+    <color name="White">#fafafa</color>
+    <color name="Gray">#f0f0f0</color>
+    <color name="DarkRed">#ffc90000</color>
     <color name="Red">#ffe81903</color>
-    <color name="Black">#ff080100</color>
-    <color name="Orange">#fff2a60e</color>
+    <color name="Black">#080100</color>
+    <color name="Orange">#f2a60e</color>
     <color name="DarkGray">#ff474345</color>
+
+    <style name="MovieFragmentTitle.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="MovieFragmentTitle.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="MovieFragmentTitle.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>

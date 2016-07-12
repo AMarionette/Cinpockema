@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_gray"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:padding="10dp"
+        android:background="@color/Red"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@id/login">
+
+        <ImageView
+            android:id="@+id/userhead"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/user_head"
+            android:visibility="visible"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" />
+        <ImageView
+            android:id="@+id/loginedUserhead"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:src="@drawable/apple"
+            android:visibility="invisible"
+            android:layout_centerVertical="true"
+            android:layout_alignParentLeft="true" />
+        <TextView
+            android:id="@+id/position"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="    立即登录"
+            android:textSize="18dp"
+            android:textColor="@color/White"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/userhead"
+            android:layout_toEndOf="@+id/userhead" />
+
+        <ImageView
+            android:id="@+id/button_white"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/button_white" />
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <ListView
+        android:id="@+id/myself_listview1"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:padding="1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/White">
+    </ListView>
+
+    <ListView
+        android:id="@+id/myself_listview2"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:padding="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/White">
+    </ListView>
+
+    <ListView
+    android:id="@+id/myself_listview3"
+    android:layout_width="match_parent"
+    android:layout_height="51dp"
+    android:padding="1dp"
+    android:layout_marginBottom="1dp"
+    android:layout_marginTop="1dp"
+    android:background="@color/White">
+   </ListView>
+
+    <ListView
+        android:id="@+id/myself_listview4"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:padding="1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/White">
+    </ListView>
+
+    <ListView
+        android:id="@+id/myself_listview5"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:padding="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/White">
+    </ListView>
+
+    <ListView
+        android:id="@+id/myself_listview6"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:padding="1dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/White">
+    </ListView>
+
+    <ListView
+        android:id="@+id/myself_listview7"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:padding="1dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="1dp"
+        android:background="@color/White">
+    </ListView>
+
+    <ListView
+        android:id="@+id/myself_listview8"
+        android:layout_width="match_parent"
+        android:layout_height="51dp"
+        android:padding="1dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/White">
+    </ListView>
+
+    </LinearLayout>
+    </ScrollView>
+</LinearLayout>

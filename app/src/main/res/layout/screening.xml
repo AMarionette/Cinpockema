@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:descendantFocusability="blocksDescendants" >
+
+    <TextView
+        android:id="@+id/start_time"
+        android:text="开始时间"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="几号厅"
+        android:id="@+id/hall_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="5dp"/>
+    <TextView
+        android:text="语言"
+        android:id="@+id/language"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:text="价格"
+        android:id="@+id/price"
+        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="购买"
+        android:id="@+id/buy_ticket"
+        android:layout_weight="1"
+        android:background="@android:color/transparent"
+        android:textColor="@color/Red"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    
+</LinearLayout>

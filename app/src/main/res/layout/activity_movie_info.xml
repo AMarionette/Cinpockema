@@ -8,54 +8,76 @@
     tools:context="com.c9.cinpockema.activity.MovieInfo">
     <!--head：包括海报和简略信息-->
     <LinearLayout
+        android:id="@+id/background_img"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:background="@color/DarkGray">
         <LinearLayout
+            android:layout_margin="10dp"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="150dp">
             <ImageView
-                android:src="@drawable/apple"
-                android:layout_width="150dp"
-                android:layout_height="wrap_content" />
+                android:id="@+id/movie_img"
+                android:layout_width="110dp"
+                android:layout_height="150dp"
+                android:paddingRight="10dp"/>
             <LinearLayout
                 android:orientation="vertical"
-                android:layout_width="137dp"
-                android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp">
                 <TextView
                     android:id="@+id/name"
+                    android:text="name"
+                    android:textColor="@color/White"
+                    android:textSize="20sp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="爱丽丝梦游仙境2"/>
+                    />
                 <TextView
-                    android:id="@+id/rating"
-                    android:layout_width="match_parent"
+                    android:id="@+id/original_title"
+                    android:textColor="@color/White"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="评分：8.6"/>
-                <TextView
-                    android:id="@+id/director"
+                    android:text="originalTitle"/>
+                <!--rating-->
+                <TableRow
+                    android:paddingTop="@dimen/padding_10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="导演:波三"/>
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/Orange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="评分："/>
+                    <TextView
+                        android:id="@+id/rating"
+                        android:textColor="@color/Orange"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="10分"/>
+                </TableRow>
+
                 <TextView
-                    android:id="@+id/leading_role"
+                    android:id="@+id/wish_count"
+                    android:textColor="@color/Orange"
+                    android:text="1000人想看"
+                    android:paddingTop="5dp"
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                
+                <TextView
+                    android:id="@+id/genres"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="主演:xx/xx/xx"/>
+                    android:text="genres"
+                    android:textColor="@color/White"
+                    android:paddingTop="@dimen/padding_10dp"/>
 
-                <TextView
-                    android:id="@+id/duration"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="时长：120分"/>
-                <TextView
-                    android:id="@+id/release_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="上映时间：2016-5-27"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -97,15 +119,19 @@
         android:id="@+id/movie_description"
         android:maxLines="3"
         android:textColor="@color/Black"
-        android:text="111112313132132"
+        android:text="content"
+        android:textSize="18sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lineSpacingExtra="7dp"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
             android:text="短评"
-            android:textSize="15sp"
+            android:textSize="25sp"
             android:textColor="@color/Black"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

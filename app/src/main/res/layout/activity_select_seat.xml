@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <!--影院名字-->
+    <TextView
+        android:id="@+id/cinema_name"
+        android:text="电影院名字"
+        android:textSize="20sp"
+        android:textColor="@color/Black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"/>
+
+    <TextView
+        android:id="@+id/start_time"
+        android:text="2016年5月12日 6:30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="5dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="可选"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/seat_sale"
+            android:layout_weight="1"/>
+        <TextView
+            android:text="已选"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/seat_selected"
+            android:layout_weight="1"/>
+        <TextView
+            android:text="已售"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/seat_sold"
+            android:layout_weight="1"/>
+    </LinearLayout>
+
+
+
+    <RelativeLayout
+        android:background="@color/foreground_dark"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <TextView
+            android:id="@+id/tv_cinema_screen"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:text="屏幕"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center" />
+
+        <!--座位-->
+        <com.c9.cinpockema.adapter.SeatTableView
+            android:id="@+id/seatviewcont"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tv_cinema_screen"
+            android:paddingLeft="10dip"
+            android:paddingRight="10dip"
+            android:layout_centerHorizontal="true">
+        </com.c9.cinpockema.adapter.SeatTableView>
+
+        <LinearLayout
+            android:id="@+id/seat_row"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/trans_black"
+            android:orientation="vertical"
+            android:layout_below="@+id/tv_cinema_screen">
+        </LinearLayout>
+    </RelativeLayout>
+
+
+    <TextView
+        android:paddingLeft="5dp"
+        android:text="已选座位"
+        android:paddingTop="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <!--显示已选座位用，在这里面添加显示行号列号的button-->
+    <LinearLayout
+        android:id="@+id/show_seat_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:paddingLeft="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/total_price"
+            android:text="100元"
+            android:textColor="@color/DarkRed"
+            android:textSize="25sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="50元x2"
+            android:layout_below="@+id/total_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"/>
+
+        <Button
+            android:layout_alignParentRight="true"
+            android:text="确认座位"
+            android:textColor="@color/White"
+            android:background="@color/Orange"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingRight="5dp"/>
+    </RelativeLayout>
+</LinearLayout>

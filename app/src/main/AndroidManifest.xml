@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.c9.cinpockema">
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- 这个权限用于进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -49,11 +54,29 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MovieInfo" />
-        <activity android:name=".activity.CinemaInfo" />
         <activity
-            android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:name=".activity.MovieInfo"
+            android:label="MovieInfoActivity" />
+        <activity
+            android:name=".activity.CinemaInfo"
+            android:theme="@style/MovieFragmentTitle" />
+        <activity
+            android:name=".activity.CinemaListActivity"
+            android:label="@string/title_activity_cinema_list"
+            android:theme="@style/MovieFragmentTitle" />
+        <activity
+            android:name=".activity.SelectSeatActivity"
+            android:theme="@style/MovieFragmentTitle" />
+        <activity android:name=".activity.OrderActivity" />
+        <activity android:name=".activity.MassageActivity" />
+        <activity android:name=".activity.VipActivity" />
+        <activity android:name=".activity.AchievementActivity" />
+        <activity android:name=".activity.CouponActivity" />
+        <activity android:name=".activity.WalletActivity" />
+        <activity android:name=".activity.ShopActivity" />
+        <activity android:name=".activity.SettingActivity" />
+        <activity android:name=".activity.LoginActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -9,9 +9,12 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.c9.cinpockema.R;
+import com.c9.cinpockema.model.DateUtil;
 import com.c9.cinpockema.model.MovieComment;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -59,9 +62,9 @@ public class MovieCommentAdapter extends BaseAdapter {
 
         //显示评论
         MovieComment movieComment = movieCommentList.get(position);
-//        viewHolder.userNameTextView.setText(movieComment.getUserName());
+        viewHolder.userNameTextView.setText(movieComment.getUser().getNickName());
         viewHolder.ratingBar.setRating((float) movieComment.getScore());
-//        viewHolder.commentDate.setText((CharSequence) movieComment.getPublishTime());
+        viewHolder.commentDate.setText(DateUtil.longToDateStr(movieComment.getCreateTime()));
         viewHolder.commentContent.setText(movieComment.getContent());
 
         return convertView;
@@ -73,4 +76,6 @@ public class MovieCommentAdapter extends BaseAdapter {
         public TextView commentDate;
         public TextView commentContent;
     }
+
+
 }

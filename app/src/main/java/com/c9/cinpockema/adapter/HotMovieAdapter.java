@@ -11,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.c9.cinpockema.model.Movie;
 import com.c9.cinpockema.R;
+import com.c9.cinpockema.model.NetworkHelper;
 
 import java.util.ArrayList;
 
@@ -49,6 +51,7 @@ public class HotMovieAdapter extends BaseAdapter {
             movieViewHolder = new ViewHolder();
             convertView = inflater.inflate(R.layout.hot_movie_item, null);
             //获取控件实例
+            movieViewHolder.movieImg = (ImageView) convertView.findViewById(R.id.movie_img);
             movieViewHolder.movieName = (TextView) convertView.findViewById(R.id.movie_name);
             movieViewHolder.movieInfo = (TextView) convertView.findViewById(R.id.movie_info);
             movieViewHolder.movieScore = (TextView) convertView.findViewById(R.id.movie_score);
@@ -58,9 +61,10 @@ public class HotMovieAdapter extends BaseAdapter {
         } else {
             movieViewHolder = (ViewHolder)convertView.getTag();
         }
-
+        //控件设置
+        NetworkHelper.sendImgRequest(movieViewHolder.movieImg, movieList.get(position).getImageUrl());//根据url获取电影图片
         movieViewHolder.movieName.setText(movieList.get(position).getTitle());
-        movieViewHolder.movieInfo.setText(movieList.get(position).getDescription());
+        movieViewHolder.movieInfo.setText(movieList.get(position).getSummary());
         movieViewHolder.movieScore.setText(Double.toString(movieList.get(position).getRating()));
         movieViewHolder.buyTicket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,6 +79,7 @@ public class HotMovieAdapter extends BaseAdapter {
 
 
     public class ViewHolder{
+        public ImageView movieImg;
         public TextView movieName;
         public TextView movieInfo;
         public TextView movieScore;
