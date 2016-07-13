@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
 //    private User user;
 //    private int userId = 0;
     public static String Username = null;
-    private String Password = null;
+    public static String Password = null;
     private String MD5string;
     private int statuscode;
     private boolean isRight = false;
