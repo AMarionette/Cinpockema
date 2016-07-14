@@ -9,4 +9,12 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.c9.cinpockema.activity.WalletActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:text="余额:    0.00元"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center_vertical" />
 </RelativeLayout>

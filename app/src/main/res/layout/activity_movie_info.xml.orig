@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/White"
+    tools:context="com.c9.cinpockema.activity.MovieInfo">
+    <!--head：包括海报和简略信息-->
+    <LinearLayout
+        android:id="@+id/background_img"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/DarkGray">
+        <LinearLayout
+            android:layout_margin="10dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="150dp">
+            <ImageView
+                android:id="@+id/movie_img"
+                android:layout_width="110dp"
+                android:layout_height="150dp"
+                android:paddingRight="10dp"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="10dp">
+                <TextView
+                    android:id="@+id/name"
+                    android:text="name"
+                    android:textColor="@color/White"
+                    android:textSize="20sp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:id="@+id/original_title"
+                    android:textColor="@color/White"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="originalTitle"/>
+                <!--rating-->
+                <TableRow
+                    android:paddingTop="@dimen/padding_10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:textColor="@color/Orange"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="评分："/>
+                    <TextView
+                        android:id="@+id/rating"
+                        android:textColor="@color/Orange"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="10分"/>
+                </TableRow>
+
+                <TextView
+                    android:id="@+id/wish_count"
+                    android:textColor="@color/Orange"
+                    android:text="1000人想看"
+                    android:paddingTop="5dp"
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+                
+                <TextView
+                    android:id="@+id/genres"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    android:text="genres"
+                    android:textColor="@color/White"
+                    android:paddingTop="@dimen/padding_10dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="0,1">
+            <TableRow>
+                <Button
+                    android:drawableLeft="@drawable/foot_news_light"
+                    android:text="收藏"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </Button>
+                <Button
+                    android:drawableLeft="@drawable/foot_out_light"
+                    android:text="评论"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </Button>
+            </TableRow>
+        </TableLayout>
+
+    </LinearLayout>
+
+    <!--立即购票按钮-->
+    <Button
+        android:id="@+id/buy_ticket"
+        android:text="立即购票"
+        android:textSize="20sp"
+        android:background="@color/Red"
+        android:textColor="@color/White"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:layout_margin="10dp"/>
+
+    <TextView
+        android:id="@+id/movie_description"
+        android:maxLines="3"
+        android:textColor="@color/Black"
+        android:text="content"
+        android:textSize="18sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:lineSpacingExtra="7dp"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:text="短评"
+            android:textSize="25sp"
+            android:textColor="@color/Black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="10dp"/>
+    </RelativeLayout>
+
+    <!--评论-->
+    <ListView
+        android:id="@+id/comment_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+
+</LinearLayout>

@@ -3,18 +3,18 @@
     <!-- These settings headers are only used on tablets. -->
 
     <header
-        android:fragment="com.c9.cinpockema.activity.SettingsActivity$GeneralPreferenceFragment"
+        android:fragment="com.c9.cinpockema.activity.SettingActivity$GeneralPreferenceFragment"
         android:icon="@drawable/ic_info_black_24dp"
-        android:title="@string/pref_header_general" />
+        android:title="通用" />
 
     <header
-        android:fragment="com.c9.cinpockema.activity.SettingsActivity$NotificationPreferenceFragment"
+        android:fragment="com.c9.cinpockema.activity.SettingActivity$NotificationPreferenceFragment"
         android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/pref_header_notifications" />
+        android:title="提醒" />
 
     <header
-        android:fragment="com.c9.cinpockema.activity.SettingsActivity$DataSyncPreferenceFragment"
+        android:fragment="com.c9.cinpockema.activity.SettingActivity$DataSyncPreferenceFragment"
         android:icon="@drawable/ic_sync_black_24dp"
-        android:title="@string/pref_header_data_sync" />
+        android:title="数据和同步" />
 
 </preference-headers>
