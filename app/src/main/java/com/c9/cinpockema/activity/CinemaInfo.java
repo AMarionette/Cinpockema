@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.Gallery;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -27,6 +29,7 @@ import com.c9.cinpockema.model.JsonStringCallBack;
 import com.c9.cinpockema.model.Movie;
 import com.c9.cinpockema.model.NetworkHelper;
 import com.c9.cinpockema.model.Screening;
+import com.c9.cinpockema.utils.DialogUtils;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -52,6 +55,7 @@ public class CinemaInfo extends AppCompatActivity {
     private TextView addressTextView;
     private TextView phoneTextView;
 
+    private FrameLayout movieGalleryLayout;
 
     private Button testButton;
 
@@ -118,9 +122,13 @@ public class CinemaInfo extends AppCompatActivity {
 
         //gallery初始化
         movieGallery = (Gallery) findViewById(R.id.movie_gallery);
+        //
+        movieGalleryLayout = (FrameLayout) findViewById(R.id.movie_gallery_layout);
+
     }
 
     private void createScreeningView() {
+
         MovieGalleryAdapter adapter = new MovieGalleryAdapter(CinemaInfo.this,movies);
         movieGallery.setAdapter(adapter);
         movieGallery.setCallbackDuringFling(false);//仅返回滑动到左后的一个位置
@@ -158,7 +166,7 @@ public class CinemaInfo extends AppCompatActivity {
     //更新UI，包括电影名字、评分、场次
     private void updateUI() {
         movieNameTV.setText(selectMovie.getTitle());
-        movieRatingTV.setText(Double.toString(selectMovie.getRating()));
+        movieRatingTV.setText(selectMovie.getRating()+ "分");
         updateScreenings();
     }
 
