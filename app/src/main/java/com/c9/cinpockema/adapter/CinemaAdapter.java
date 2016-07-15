@@ -8,10 +8,15 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
+import com.amap.api.maps2d.AMapUtils;
+import com.amap.api.maps2d.model.LatLng;
 import com.c9.cinpockema.R;
 import com.c9.cinpockema.model.Cinema;
 
+
+
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -19,9 +24,15 @@ import java.util.ArrayList;
  */
 public class CinemaAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    private ArrayList<Cinema> cinemaList;
+    private List<Cinema> cinemaList;
+    private LatLng myPositionLatLng;//当前经纬度
+    public CinemaAdapter(Context context, List<Cinema> cinemaList, LatLng myPositionLatLng) {
+        inflater = LayoutInflater.from(context);
+        this.cinemaList = cinemaList;
+        this.myPositionLatLng = myPositionLatLng;
+    }
 
-    public CinemaAdapter(Context context, ArrayList<Cinema> cinemaList) {
+    public CinemaAdapter(Context context, List<Cinema> cinemaList) {
         inflater = LayoutInflater.from(context);
         this.cinemaList = cinemaList;
     }
@@ -56,9 +67,19 @@ public class CinemaAdapter extends BaseAdapter {
         }
         cinemaViewHolder.cinemaName.setText(cinemaList.get(position).getName());
         cinemaViewHolder.cinemaLocation.setText(cinemaList.get(position).getAddress());
-        //距离的计算未解决
-        cinemaViewHolder.cinemaDistance.setText("500m");
-
+        if (myPositionLatLng != null) {
+            //影院坐标
+            LatLng cinemaLatlng = new LatLng(cinemaList.get(position).getLatitude(), cinemaList.get(position).getLongitude());
+            // 计算量坐标点距离
+            double dis =AMapUtils.calculateLineDistance(myPositionLatLng, cinemaLatlng);
+            if (dis / 1000 >= 1) {
+                cinemaViewHolder.cinemaDistance.setText((int)(dis/1000) + "千米");
+            } else {
+            cinemaViewHolder.cinemaDistance.setText(dis + "米");
+            }
+        } else {
+            cinemaViewHolder.cinemaDistance.setVisibility(View.GONE);
+        }
         //Log.v("size:","size is"+cinemaList.size());
         return convertView;
     }

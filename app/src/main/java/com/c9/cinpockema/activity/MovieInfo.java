@@ -1,6 +1,7 @@
 package com.c9.cinpockema.activity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -26,6 +27,7 @@ import com.c9.cinpockema.model.JsonStringCallBack;
 import com.c9.cinpockema.model.Movie;
 import com.c9.cinpockema.model.MovieComment;
 import com.c9.cinpockema.model.NetworkHelper;
+import com.c9.cinpockema.utils.DialogUtils;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -43,8 +45,10 @@ public class MovieInfo extends Activity implements View.OnClickListener {
     private TextView genresTV;//类型
     private TextView descriotionTV;//电影介绍
     private TextView wishCountTV;
+    private ImageView showMoreContentImg;
 
 
+    boolean isShowMoreContent = false;
     //callback
     private JsonStringCallBack movieDetailCallBack = new JsonStringCallBack() {
         @Override
@@ -75,7 +79,9 @@ public class MovieInfo extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_movie_info);
-
+//        DialogUtils.showLoadingDialog(MovieInfo.this,"提示","加载中");
+//        DialogUtils.showDialog(MovieInfo.this);
+        showProgressDialog("提示","加载中");
         movieImg = (ImageView) findViewById(R.id.movie_img);
         movieNameTV = (TextView) findViewById(R.id.name);
         originalTitleTV = (TextView) findViewById(R.id.original_title);
@@ -86,6 +92,21 @@ public class MovieInfo extends Activity implements View.OnClickListener {
         buyTicketButton = (Button) findViewById(R.id.buy_ticket);
         buyTicketButton.setOnClickListener(this);
         commentListView = (ListView) findViewById(R.id.comment_list_view);
+        showMoreContentImg = (ImageView) findViewById(R.id.show_more_movie_content);
+        showMoreContentImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (!isShowMoreContent) {
+                    showMoreContentImg.setImageResource(R.drawable.pull_up);
+                    descriotionTV.setMaxLines(20);
+                    isShowMoreContent = true;
+                } else {
+                    showMoreContentImg.setImageResource(R.drawable.push_down_img);
+                    descriotionTV.setMaxLines(3);
+                    isShowMoreContent = false;
+                }
+            }
+        });
         //初始化
         init();
     }
@@ -143,8 +164,20 @@ public class MovieInfo extends Activity implements View.OnClickListener {
         genresTV.setText(movie.getGenres());
         descriotionTV.setText(movie.getSummary());
         wishCountTV.setText("(" + movie.getWishCount() + "人想看" + ")");
+        progressDialog.dismiss();
     }
 
+    private ProgressDialog progressDialog;
+    public void showProgressDialog(String title, String message) {
+        if (progressDialog == null) {
+            progressDialog = ProgressDialog.show(MovieInfo.this, title,
+                    message, true, false);
+        } else if (progressDialog.isShowing()) {
+            progressDialog.setTitle(title);
+            progressDialog.setMessage(message);
+        }
 
+        progressDialog.show();
 
+    }
 }

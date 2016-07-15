@@ -22,9 +22,26 @@ import java.util.ArrayList;
 public class MovieGalleryAdapter extends BaseAdapter {
     private ArrayList<Movie> movies;
     private Context context;
-    public MovieGalleryAdapter(Context context, ArrayList<Movie> movies){
-        this.movies = movies;
+    public MovieGalleryAdapter(Context context, ArrayList<Movie> movieList){
         this.context = context;
+        movies = new ArrayList<>();
+        for (int i = 0; i < movieList.size(); i++) {
+            if (!isContainMovie(movieList.get(i))) {
+                movies.add(movieList.get(i));
+            }
+        }
+    }
+
+
+    private boolean isContainMovie(Movie movie) {
+        boolean isContain = false;
+        for (int i = 0; i < movies.size(); i++) {
+            if (movie.getId() == movies.get(i).getId()) {
+                isContain = true;
+                break;
+            }
+        }
+        return isContain;
     }
 
     @Override

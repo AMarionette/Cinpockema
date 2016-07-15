@@ -1,10 +1,13 @@
 package com.c9.cinpockema.activity;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,32 +15,44 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps2d.model.LatLng;
 import com.c9.cinpockema.R;
 import com.c9.cinpockema.adapter.CinemaAdapter;
 import com.c9.cinpockema.model.Cinema;
+import com.c9.cinpockema.model.Constant;
+import com.c9.cinpockema.model.FastJsonParser;
+import com.c9.cinpockema.model.JsonStringCallBack;
+import com.c9.cinpockema.model.NetworkHelper;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by a694393453 on 2016/4/10.
  */
-public class CinemaFragment extends Fragment {
+public class CinemaFragment extends Fragment implements JsonStringCallBack {
     private ListView cinemaListView;
     private String currentAddress = "无";
     private TextView currentPosition;
+    private List<Cinema> cinemaList;
+    private ProgressDialog progressDialog;
+    private LatLng myPositionLatLng;
 
     //声明AMapLocationClient类对象
     private AMapLocationClient mLocationClient = null;
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
+        showProgressDialog("提示","正在加载，请稍等");
+        cinemaList = new ArrayList<>();
         Log.v("attach", "Cinema Fragment");
         //位置请求和网络请求
         AMapLocationListener mAMapLocationListener = new AMapLocationListener(){
@@ -51,7 +66,8 @@ public class CinemaFragment extends Fragment {
                         Log.i("Latitude",Double.toString(amapLocation.getLatitude()));
                         amapLocation.getLongitude();//获取经度
                         Log.i("Longitude",Double.toString(amapLocation.getLongitude()));
-                        amapLocation.getAccuracy();//获取精度信息
+                        myPositionLatLng = new LatLng(amapLocation.getLatitude(),amapLocation.getLongitude());
+//                        amapLocation.getAccuracy();//获取精度信息
 //                        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //                        Date date = new Date(amapLocation.getTime());
 //                        df.format(date);//定位时间
@@ -63,9 +79,11 @@ public class CinemaFragment extends Fragment {
 //                        amapLocation.getStreet();//街道信息
 //                        amapLocation.getStreetNum();//街道门牌号信息
 //                        amapLocation.getCityCode();//城市编码
+                        //Toast.makeText(MyApplication.getContext(),amapLocation.getCityCode(),Toast.LENGTH_SHORT).show();
 //                        amapLocation.getAdCode();//地区编码
 //                        amapLocation.getAoiName();//获取当前定位点的AOI信息
                         currentPosition.setText(amapLocation.getAddress());
+                        NetworkHelper.sendStrRequest(CinemaFragment.this, Constant.URL + "/cinemas/cities/" + 453);
                     } else {
                         //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
                         Log.e("AmapError","location Error, ErrCode:"
@@ -80,9 +98,10 @@ public class CinemaFragment extends Fragment {
         initOption();
         //设置定位回调监听
         mLocationClient.setLocationListener(mAMapLocationListener);
-
         mLocationClient.startLocation();
     }
+
+
 
     @Nullable
     @Override
@@ -92,43 +111,73 @@ public class CinemaFragment extends Fragment {
         currentPosition = (TextView) view.findViewById(R.id.current_location_tv);
         currentPosition.setText(currentAddress);
         cinemaListView = (ListView) view.findViewById(R.id.cinema_listview);
-
-        CinemaAdapter cinemaAdapter = new CinemaAdapter(getActivity(), getCinemaList());
+        //添加适配器
+        CinemaAdapter cinemaAdapter = new CinemaAdapter(getActivity(), cinemaList,myPositionLatLng);
         cinemaListView.setAdapter(cinemaAdapter);
+        cinemaListView.deferNotifyDataSetChanged();
         //跳转到影院详情页面
         cinemaListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                Intent intent = new Intent(getActivity().getApplicationContext(), CinemaInfo.class);
+                Intent intent = new Intent(MyApplication.getContext(), CinemaInfo.class);
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constant.CINEMAID, cinemaList.get(position).getId());
+                intent.putExtras(bundle);
                 startActivity(intent);
             }
         });
-        //更新
-        cinemaAdapter.notifyDataSetChanged();
         return view;
         //return super.onCreateView(inflater,container,savedInstanceState);
     }
 
-    public ArrayList<Cinema> getCinemaList() {
-        ArrayList<Cinema> cinemas = new ArrayList<Cinema>();
+//    public ArrayList<Cinema> getCinemaList() {
+//        ArrayList<Cinema> cinemas = new ArrayList<Cinema>();
+//
+//        Cinema cinema0 = new Cinema();
+//        cinema0.setName("金逸珠江国际影城（大学城店）");
+//        cinema0.setAddress("番禺区小谷围街北岗村中二横路新天地");
+//        cinemas.add(cinema0);
+//
+//        Cinema cinema1 = new Cinema();
+//        cinema1.setName("广东科学中心IMAX巨幕影院");
+//        cinema1.setAddress("番禺区大学城科普路168号");
+//        cinemas.add(cinema1);
+//        for (int i = 0; i < 10; i++) {
+//            Cinema cinema2 = new Cinema();
+//            cinema2.setName("映联万和影城");
+//            cinema2.setAddress("海珠区新港东路618号南丰汇广场3楼");
+//            cinemas.add(cinema2);
+//        }
+//        return cinemas;
+//    }
 
-        Cinema cinema0 = new Cinema();
-        cinema0.setName("金逸珠江国际影城（大学城店）");
-        cinema0.setAddress("番禺区小谷围街北岗村中二横路新天地");
-        cinemas.add(cinema0);
 
-        Cinema cinema1 = new Cinema();
-        cinema1.setName("广东科学中心IMAX巨幕影院");
-        cinema1.setAddress("番禺区大学城科普路168号");
-        cinemas.add(cinema1);
-        for (int i = 0; i < 10; i++) {
-            Cinema cinema2 = new Cinema();
-            cinema2.setName("映联万和影城");
-            cinema2.setAddress("海珠区新港东路618号南丰汇广场3楼");
-            cinemas.add(cinema2);
+    /*
+   * 提示加载
+   */
+    public void showProgressDialog(String title, String message) {
+        if (progressDialog == null) {
+            progressDialog = ProgressDialog.show(getActivity(), title,
+                    message, true, false);
+        } else if (progressDialog.isShowing()) {
+            progressDialog.setTitle(title);
+            progressDialog.setMessage(message);
         }
-        return cinemas;
+
+        progressDialog.show();
+
+    }
+
+    /*
+     * 隐藏提示加载
+     */
+    public void hideProgressDialog() {
+
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.dismiss();
+        }
+
     }
 
 
@@ -136,7 +185,6 @@ public class CinemaFragment extends Fragment {
     public void setArguments(Bundle args) {
         super.setArguments(args);
     }
-
 
     private void initOption() {
         AMapLocationClientOption mLocationOption = new AMapLocationClientOption();
@@ -161,6 +209,14 @@ public class CinemaFragment extends Fragment {
         mLocationClient.setLocationOption(mLocationOption);
     }
 
+    @Override
+    public void onSuccess(String jsonStr) {
+        cinemaList = FastJsonParser.listParse(jsonStr,Cinema.class);
+        CinemaAdapter cinemaAdapter = new CinemaAdapter(getActivity(), cinemaList,myPositionLatLng);
+        cinemaListView.setAdapter(cinemaAdapter);
+        cinemaListView.deferNotifyDataSetChanged();
+        hideProgressDialog();
+    }
 }
 
 

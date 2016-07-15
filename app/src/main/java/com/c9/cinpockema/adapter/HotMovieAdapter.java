@@ -65,7 +65,7 @@ public class HotMovieAdapter extends BaseAdapter {
         NetworkHelper.sendImgRequest(movieViewHolder.movieImg, movieList.get(position).getImageUrl());//根据url获取电影图片
         movieViewHolder.movieName.setText(movieList.get(position).getTitle());
         movieViewHolder.movieInfo.setText(movieList.get(position).getSummary());
-        movieViewHolder.movieScore.setText(Double.toString(movieList.get(position).getRating()));
+        movieViewHolder.movieScore.setText(movieList.get(position).getRating()+ "分");
         movieViewHolder.buyTicket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

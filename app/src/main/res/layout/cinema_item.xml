@@ -32,7 +32,6 @@
 
     <TextView
         android:drawableLeft="@drawable/distance_img"
-        android:text="500m"
         android:gravity="center_vertical"
         android:id="@+id/cinema_distance"
         android:layout_width="wrap_content"
