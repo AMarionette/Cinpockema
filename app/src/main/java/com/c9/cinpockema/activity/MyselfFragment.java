@@ -3,6 +3,9 @@ package com.c9.cinpockema.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.Settings;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.Layout;
@@ -29,6 +32,12 @@ import java.util.ArrayList;
  */
 
 public class MyselfFragment extends Fragment implements View.OnClickListener {
+
+    public static ImageView userHead;
+    public static ImageView loginedUserHead;
+    private static TextView posiTion;
+
+
     private ListView myselfListView1;
     private ListView myselfListView2;
     private ListView myselfListView3;
@@ -52,6 +61,13 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.myself_fragment, null);
 
+        System.out.println(LoginActivity.is_logined);
+
+        userHead = (ImageView) view.findViewById(R.id.userhead);
+        posiTion = (TextView) view.findViewById(R.id.position);
+        loginedUserHead = (ImageView) view.findViewById(R.id.loginedUserhead);
+
+
         myselfListView1 = (ListView) view.findViewById(R.id.myself_listview1);
         myselfListView2 = (ListView) view.findViewById(R.id.myself_listview2);
         myselfListView3 = (ListView) view.findViewById(R.id.myself_listview3);
@@ -60,6 +76,7 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         myselfListView6 = (ListView) view.findViewById(R.id.myself_listview6);
         myselfListView7 = (ListView) view.findViewById(R.id.myself_listview7);
         myselfListView8 = (ListView) view.findViewById(R.id.myself_listview8);
+
 
         MyselfAdapter myselfAdapter1 = new MyselfAdapter(getActivity(), getMyselfList1());
         myselfListView1.setAdapter(myselfAdapter1);
@@ -81,8 +98,15 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         myselfListView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), OrderActivity.class);
-                startActivity(intent);
+                if (LoginActivity.is_logined) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), OrderActivity.class);
+                    startActivity(intent);
+                 //   getActivity().finish();
+                } else {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                //    getActivity().finish();
+                }
             }
         });
         myselfAdapter1.notifyDataSetChanged();
@@ -91,8 +115,15 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         myselfListView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), MassageActivity.class);
-                startActivity(intent);
+                if (LoginActivity.is_logined) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), MassageActivity.class);
+                    startActivity(intent);
+                 //   getActivity().finish();
+                } else {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                //    getActivity().finish();
+                };
             }
         });
         myselfAdapter2.notifyDataSetChanged();
@@ -100,8 +131,15 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         myselfListView3.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), VipActivity.class);
-                startActivity(intent);
+                if (LoginActivity.is_logined) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), VipActivity.class);
+                    startActivity(intent);
+                 //   getActivity().finish();
+                } else {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                 //   getActivity().finish();
+                }
             }
         });
         myselfAdapter3.notifyDataSetChanged();
@@ -109,8 +147,15 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         myselfListView4.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), AchievementActivity.class);
-                startActivity(intent);
+                if (LoginActivity.is_logined) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), AchievementActivity.class);
+                    startActivity(intent);
+                  //  getActivity().finish();
+                } else {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                   // getActivity().finish();
+                }
             }
         });
         myselfAdapter4.notifyDataSetChanged();
@@ -118,8 +163,15 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         myselfListView5.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), CouponActivity.class);
-                startActivity(intent);
+                if (LoginActivity.is_logined) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), CouponActivity.class);
+                    startActivity(intent);
+                   // getActivity().finish();
+                } else {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                  //  getActivity().finish();
+                }
             }
         });
         myselfAdapter5.notifyDataSetChanged();
@@ -127,8 +179,15 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         myselfListView6.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), WalletActivity.class);
-                startActivity(intent);
+                if (LoginActivity.is_logined) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), WalletActivity.class);
+                    startActivity(intent);
+                  //  getActivity().finish();
+                } else {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                  //  getActivity().finish();
+                }
             }
         });
         myselfAdapter6.notifyDataSetChanged();
@@ -136,8 +195,15 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         myselfListView7.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), ShopActivity.class);
-                startActivity(intent);
+                if (LoginActivity.is_logined) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), ShopActivity.class);
+                    startActivity(intent);
+                  //  getActivity().finish();
+                } else {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                   // getActivity().finish();
+                }
             }
         });
         myselfAdapter7.notifyDataSetChanged();
@@ -145,25 +211,31 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         myselfListView8.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 Intent intent = new Intent(getActivity().getApplicationContext(), SettingActivity.class);
                 startActivity(intent);
+               // getActivity().finish();
             }
         });
         myselfAdapter8.notifyDataSetChanged();
 
 
 
-        Login = (RelativeLayout) view.findViewById(R.id.login);
-        Login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
-                startActivity(intent);
-            }
-        });
+        if (!LoginActivity.is_logined) {
+            Login = (RelativeLayout) view.findViewById(R.id.login);
+            Login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getActivity().getApplicationContext(), LoginActivity.class);
+                    startActivity(intent);
+                  //  getActivity().finish();
+                }
+            });
+        }
 
-
-
+        if (LoginActivity.is_logined) {
+            setHead();
+        }
 
         return view;
     }
@@ -239,6 +311,12 @@ public class MyselfFragment extends Fragment implements View.OnClickListener {
         myselfs.add(myself0);
 
         return myselfs;
+    }
+
+    public static void setHead() {
+        userHead.setVisibility(View.INVISIBLE);
+        loginedUserHead.setVisibility(View.VISIBLE);
+        posiTion.setText(LoginActivity.Username);
     }
 
     @Override
